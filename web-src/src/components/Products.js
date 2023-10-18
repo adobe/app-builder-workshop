@@ -20,13 +20,14 @@ import {
     Cell,
     View,
     Flex,
-    ProgressCircle
+    ProgressCircle, Button
 } from '@adobe/react-spectrum'
+import { useCommerceProducts } from '../hooks/useCommerceProducts'
 import React from "react";
 
 export const Products = props => {
-    const isLoadingCommerceProducts = false
-    const commerceProducts = [{name:'Sample Product', id:1}]
+    const {isLoadingCommerceProducts, commerceProducts} = useCommerceProducts({...props, pageSize: 20, currentPage: 1})
+
     const productsColumns = [
         {name: 'Name', uid: 'name'},
         {name: 'SKU', uid: 'sku'},

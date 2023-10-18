@@ -26,3 +26,41 @@ export async function callAction(props, action, operation, body = {}) {
 
   return await res.json()
 }
+
+export async function callMesh(url, pageSize, currentPage) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+        {
+          query: `query {
+            products(
+            search: ""
+            pageSize: ${pageSize}
+            currentPage: ${currentPage}
+            sort: {name: ASC}
+            ) {
+            items {
+              id,
+              sku,
+              name,
+              type_id,
+              created_at,
+              updated_at,
+              price {
+                regularPrice {
+                  amount {
+                    value
+                  }
+                }
+              }
+              pdf_file
+            }
+           }
+          }`
+        })
+  })
+  return await res.json();
+}
