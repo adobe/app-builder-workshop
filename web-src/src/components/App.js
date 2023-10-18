@@ -13,6 +13,7 @@ import React from 'react'
 import { Provider, lightTheme } from '@adobe/react-spectrum'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import {Products} from "./Products";
 
 function App (props) {
   console.log('App component loaded')
@@ -22,6 +23,7 @@ function App (props) {
           <BrowserRouter>
               <Provider theme={lightTheme} colorScheme={'light'}>
                   <Routes>
+                      <Route index element={<Products/>} />
                       <Route path={'index.html'} />
                   </Routes>
               </Provider>

@@ -26,5 +26,3 @@ export async function callAction(props, action, operation, body = {}) {
 
   return await res.json()
 }
-
-
