@@ -13,25 +13,22 @@ import React from 'react'
 import { Provider, lightTheme } from '@adobe/react-spectrum'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
+import ExtensionRegistration from './ExtensionRegistration'
 import {Products} from "./Products";
 
 function App (props) {
-  console.log('App component loaded')
-
   return (
       <ErrorBoundary onError={onError} FallbackComponent={fallbackComponent}>
           <BrowserRouter>
               <Provider theme={lightTheme} colorScheme={'light'}>
                   <Routes>
-                      <Route index element={<Products/>} />
-                      <Route path={'index.html'} />
+                      <Route index element={<Products />} />
+                      <Route path={'index.html'} element={<ExtensionRegistration />} />
                   </Routes>
               </Provider>
           </BrowserRouter>
       </ErrorBoundary>
   )
-
-  // Methods
 
   // error handler on UI rendering failure
     function onError(e, componentStack) {}

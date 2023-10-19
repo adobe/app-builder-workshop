@@ -9,23 +9,8 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-import {createRoot} from 'react-dom/client'
-import App from './components/App'
-import './index.css'
 
-window.React = require('react')
-
-const mockRuntime = {
-  on: () => {}
-}
-renderApp(mockRuntime, {})
-
-function renderApp(runtime, ims) {
-  const client = createRoot(document.getElementById('root'))
-
-  client.render(
-      <App runtime={runtime} ims={ims} />
-  )
-}
+module.exports = {
+  extensionId: 'bcn_app_builder_workshop_app_' + process.env.ATTENDEE_FULLNAME.replace(' ', '_').toLowerCase(),
+  rootElementId: 'backend-ui',
+};

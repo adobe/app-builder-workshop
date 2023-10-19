@@ -7,3 +7,26 @@ extensions:
     actions: actions
     web: web-src
     runtimeManifest:
+      packages:
+        BcnAppBuilderWorkshop:
+          license: Apache-2.0
+          actions:
+            randomizer:
+              function: actions/randomizer/index.js
+              web: 'yes'
+              runtime: 'nodejs:16'
+              inputs:
+                COMMERCE_BASE_URL: $COMMERCE_BASE_URL
+                COMMERCE_CONSUMER_KEY: $COMMERCE_CONSUMER_KEY
+                COMMERCE_CONSUMER_SECRET: $COMMERCE_CONSUMER_SECRET
+                COMMERCE_ACCESS_TOKEN: $COMMERCE_ACCESS_TOKEN
+                COMMERCE_ACCESS_TOKEN_SECRET: $COMMERCE_ACCESS_TOKEN_SECRET
+                LOG_LEVEL: debug
+                RANDOMIZER_FIRSTNAME: $RANDOMIZER_FIRSTNAME
+                RANDOMIZER_LASTNAME: $RANDOMIZER_LASTNAME
+                RANDOMIZER_COMPANY_NAME: $RANDOMIZER_COMPANY_NAME
+                RANDOMIZER_URL: $RANDOMIZER_URL
+                RANDOMIZER_API_KEY: $RANDOMIZER_API_KEY
+              annotations:
+                require-adobe-auth: true
+                final: true

@@ -1,26 +1,26 @@
 {
-    "meshConfig": {
-      "sources": [
-        {
-          "name": "CommerceGRAPHQL",
-          "handler": {
-            "graphql": {
-              "endpoint": "https://staging-5em2ouy-efo2rc3kezxte.eu-4.magentosite.cloud/graphql/"
-            }
+  "meshConfig": {
+    "sources": [
+      {
+        "name": "CommerceGRAPHQL",
+        "handler": {
+          "graphql": {
+            "endpoint": "https://staging-5em2ouy-efo2rc3kezxte.eu-4.magentosite.cloud/graphql/"
           }
         }
-      ],
-      "responseConfig": {
-        "CORS": {
-          "methods": [
-            "POST",
-            "GET",
-            "PUT",
-            "HEAD",
-            "OPTIONS"
-          ],
-          "origin": "*"
-        }
+      }
+    ],
+    "responseConfig": {
+      "CORS": {
+        "methods": [
+          "POST",
+          "GET",
+          "PUT",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "origin": "*"
       }
     }
   }
+}

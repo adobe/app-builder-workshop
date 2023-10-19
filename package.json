@@ -8,6 +8,7 @@
     "@adobe/exc-app": "^1.1.3",
     "@adobe/react-spectrum": "^3.24.1",
     "@adobe/uix-core": "^0.8.2",
+    "@adobe/uix-guest": "^0.8.2",
     "@spectrum-icons/workflow": "^4.0.6",
     "axios": "^0.24.0",
     "cloudevents": "^6.0.3",

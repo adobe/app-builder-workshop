@@ -9,39 +9,23 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
-export async function callAction(props, action, operation, body = {}) {
-  const actions = require('./config.json')
-  const res = await fetch(actions[action], {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-gw-ims-org-id': props.ims.org,
-      'authorization': `Bearer ${props.ims.token}`
-    },
-    body: JSON.stringify({
-      operation,
-      ...body
-    })
-  })
-
-  return await res.json()
-}
 
 export async function callMesh(url, pageSize, currentPage) {
+  console.log("Retrieve data from API Mesh using url %s", url)
   const res = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(
-        {
-          query: `query {
-            products(
+      {
+        query: `query {
+          products(
             search: ""
             pageSize: ${pageSize}
             currentPage: ${currentPage}
             sort: {name: ASC}
-            ) {
+          ) {
             items {
               id,
               sku,
@@ -58,9 +42,11 @@ export async function callMesh(url, pageSize, currentPage) {
               }
               pdf_file
             }
-           }
-          }`
-        })
+          }
+        }`
+      }
+    )
   })
   return await res.json();
 }
+
