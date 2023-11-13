@@ -19,7 +19,7 @@ export async function main(params) {
     const logger = Core.Logger('main', { level: params.LOG_LEVEL || 'info' });
 
     try {
-        const requiredParams = ['COMMERCE_BASE_URL', 'RANDOMIZER_URL', 'RANDOMIZER_API_KEY', 'RANDOMIZER_FIRSTNAME', 'RANDOMIZER_LASTNAME', 'RANDOMIZER_COMPANY_NAME'];
+        const requiredParams = ['COMMERCE_BASE_URL', 'OMS_URL', 'OMS_API_KEY'];
         const requiredHeaders = [];
         const errorMessage = checkMissingRequestInputs(params, requiredParams, requiredHeaders);
 
@@ -27,20 +27,18 @@ export async function main(params) {
             return errorResponse(400, errorMessage, logger);
         }
 
-        const res = await axios.post(params.RANDOMIZER_URL, {
-            "firstname": params.RANDOMIZER_FIRSTNAME,
-            "lastname": params.RANDOMIZER_LASTNAME,
-            "company_name": params.RANDOMIZER_COMPANY_NAME,
-            "api_key": params.RANDOMIZER_API_KEY
+        const res = await axios.post(params.OMS_URL, {
+            "sku": params.data.value.sku,
+            "price": params.data.value.price,
+            "api_key": params.OMS_API_KEY
         });
 
-        const randomizedContent = await res.data;
-
-        if (!randomizedContent?.random) {
-            throw new Error("Random number not returned");
+        const omsContent = await res.data;
+        if (!omsContent?.stock) {
+            throw new Error("Stock not returned");
         }
 
-        logger.info("Random number returned: %s", randomizedContent.random);
+        logger.info("Stock returned by OMS api: %s", omsContent.stock);
 
         const oauth = getCommerceOauthClient(
             {
@@ -53,27 +51,18 @@ export async function main(params) {
             logger
         )
 
-        const attributeOptions = await oauth.get('products/attributes/random_numbers/options');
-
-        logger.info("Got custom attribute options: %s", JSON.stringify(attributeOptions).toString());
-
-        // Add random number to custom attributes if not already there
-        const option = attributeOptions.find(o => o.label === randomizedContent.random.toString());
-
-        if (!option) {
-            await oauth.post('products/attributes/random_numbers/options', {
-                option: {
-                    "value": randomizedContent.random.toString(),
-                    "label": randomizedContent.random.toString()
-                }
-            });
-            logger.info("Random number added to custom attributes: %s", randomizedContent.random);
-        }
+        await oauth.put('products/' + params.data.value.sku + '/stockItems/1', {
+            stockItem: {
+                "qty": omsContent.stock
+            }
+        });
+        logger.info("Product updated for the SKU %s. New qty is: %s", params.data.value.sku, omsContent.stock);
 
         return {
             statusCode: 200,
             body: {
-                "random": randomizedContent.random
+                "sku": params.data.value.sku,
+                "stock": omsContent.stock
             }
         }
     } catch (error) {
