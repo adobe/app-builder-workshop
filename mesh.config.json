@@ -8,6 +8,23 @@
             "endpoint": "https://staging-5em2ouy-efo2rc3kezxte.eu-4.magentosite.cloud/graphql/"
           }
         }
+      },
+      {
+        "name": "OMS",
+        "handler": {
+          "JsonSchema": {
+            "baseUrl": "https://675172-bcnworkshopoms-stage.adobeio-static.net/api/v1/web/oms-app-builder/",
+            "operations": [
+              {
+                "type": "Query",
+                "field": "inventory",
+                "path": "/get-products",
+                "method": "GET",
+                "responseSchema": "schema/products.schema.json"
+              }
+            ]
+          }
+        }
       }
     ],
     "responseConfig": {

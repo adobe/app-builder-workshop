@@ -48,6 +48,7 @@ export const Products = props => {
         {name: 'Name', uid: 'name'},
         {name: 'Status', uid: 'status'},
         {name: 'Price', uid: 'price'},
+        {name: 'OMS Stock', uid: 'stock'},
         {name: 'Type ID', uid: 'type_id'},
         {name: 'Created At', uid: 'created_at'},
         {name: 'Updated At', uid: 'updated_at'},

@@ -22,6 +22,12 @@ export const useCommerceProducts = props => {
 
         commerceProductsResponse.data.products.items.forEach((item) => {
             item.price = item?.price?.regularPrice?.amount?.value;
+            item.stock = 'out of sync'
+            commerceProductsResponse.data.inventory.forEach((inventoryEntry) => {
+                if(item.sku === inventoryEntry.sku) {
+                    item.stock = inventoryEntry.stock;
+                }
+            })
         });
 
         setCommerceProducts(commerceProductsResponse.error ? [] : commerceProductsResponse.data.products.items)
