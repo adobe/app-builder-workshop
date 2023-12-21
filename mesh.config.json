@@ -1,0 +1,26 @@
+{
+  "meshConfig": {
+    "sources": [
+      {
+        "name": "CommerceGRAPHQL",
+        "handler": {
+          "graphql": {
+            "endpoint": "<YOUR_COMMERCE_INSTANCE_URL>/graphql/"
+          }
+        }
+      }
+    ],
+    "responseConfig": {
+      "CORS": {
+        "methods": [
+          "POST",
+          "GET",
+          "PUT",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "origin": "*"
+      }
+    }
+  }
+}
