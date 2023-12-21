@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "http://localhost/products.schema.json",
+  "title": "Inventory",
+  "description": "Get Inventory",
+  "type": "array",
+  "items": {"$ref": "#/$defs/inventory"},
+  "$defs": {
+    "inventory" : {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Product Id",
+          "type": "integer"
+        },
+        "price": {
+          "description": "Product price",
+          "type": "number"
+        },
+        "sku": {
+          "description": "Product SKU",
+          "type": "string"
+        },
+        "stock": {
+          "description": "Product stock",
+          "type": "integer"
+        },
+        "timestamp": {
+          "description": "Current timestamp",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "price",
+        "sku",
+        "stock",
+        "timestamp"
+      ]
+    }
+  }
+}

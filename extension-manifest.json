@@ -1,0 +1,8 @@
+{
+  "name": "bcn-app-builder-workshop",
+  "displayName": "BCN App Builder Workshop",
+  "description": "Dive into the extensibility capabilities of Adobe Commerce",
+  "platform": "web",
+  "id": "bcn-app-builder-workshop-app",
+  "version": "1.0.0"
+}

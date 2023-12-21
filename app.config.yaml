@@ -1,0 +1,29 @@
+extensions:
+  commerce/backend-ui/1:
+    operations:
+      view:
+        - type: web
+          impl: index.html
+    actions: actions
+    web: web-src
+    runtimeManifest:
+      packages:
+        BcnAppBuilderWorkshop:
+          license: Apache-2.0
+          actions:
+            oms:
+              function: actions/productUpdate/index.js
+              web: 'no'
+              runtime: 'nodejs:16'
+              inputs:
+                COMMERCE_BASE_URL: $COMMERCE_BASE_URL
+                COMMERCE_CONSUMER_KEY: $COMMERCE_CONSUMER_KEY
+                COMMERCE_CONSUMER_SECRET: $COMMERCE_CONSUMER_SECRET
+                COMMERCE_ACCESS_TOKEN: $COMMERCE_ACCESS_TOKEN
+                COMMERCE_ACCESS_TOKEN_SECRET: $COMMERCE_ACCESS_TOKEN_SECRET
+                LOG_LEVEL: debug
+                OMS_URL: $OMS_URL
+                OMS_API_KEY: $OMS_API_KEY
+              annotations:
+                require-adobe-auth: false
+                final: true
